@@ -37,7 +37,7 @@ Custom property | Description
 @homepage index.html
 @demo demo.html
 -->
-<dom-module id="px-percent-circle">
+<dom-module id="px-nopercent-circle">
   <template>
     <style include="px-percent-circle-styles"></style>
 
@@ -46,7 +46,6 @@ Custom property | Description
       <path id="arc" stroke-width$="[[_thickness]]" d$="[[_arcPath]]"></path>
       <text id="text" x$="[[_cx]]" y$="[[_cy]]" font-size$="[[_placement.tf]]" dx$="[[_placement.tx]]" dy$="[[_placement.ty]]">
         <tspan id="label">[[_percent]]</tspan>
-        <tspan id="percent" font-size$="[[_placement.pf]]" dx$="[[_placement.px]]" dy$="[[_placement.py]]">%</tspan>
       </text>
     </svg>
 
@@ -56,9 +55,10 @@ Custom property | Description
 <script>
   Polymer({
 
-    is: 'px-percent-circle',
+    is: 'px-nopercent-circle',
 
     properties: {
+
       /**
        * Value of the circle - percent is calculated using the maximum provided. Negative values result in 0% while values above maximum result in 100%.
        * @property val
@@ -189,13 +189,10 @@ Custom property | Description
      * @param size
      */
     _computedPlacement: function(size) {
-      return {
+       return {
         "tf": size*0.3+'px',
         "tx": size*0.01,
-        "ty": size*0.09,
-        "pf": size*0.2+'px',
-        "px": size*(-0.05),
-        "py": 0};
+        "ty": size*0.09};
     },
     /**
      * Cleanses invalid inputs by clipping value between 0 and 100.
